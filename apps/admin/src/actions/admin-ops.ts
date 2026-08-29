@@ -120,7 +120,7 @@ export async function updateProjectStatus({
 
     const oldStatus = project.status;
 
-    await db.$transaction(async (tx) => {
+    await db.$transaction(async (tx: any) => {
       await tx.project.update({
         where: { id: projectId },
         data: { status: newStatus },
@@ -172,7 +172,7 @@ export async function extendProjectDeadline({
     const oldDate = project.targetDeliveryDate;
     const targetDate = new Date(newTargetDate);
 
-    await db.$transaction(async (tx) => {
+    await db.$transaction(async (tx: any) => {
       await tx.project.update({
         where: { id: projectId },
         data: { targetDeliveryDate: targetDate },

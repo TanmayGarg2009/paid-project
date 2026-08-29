@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
         });
 
         if (milestone) {
-          await db.$transaction(async (tx) => {
+          await db.$transaction(async (tx: any) => {
             // Update or create payment record
             await tx.payment.upsert({
               where: { idempotencyKey: `pay_${razorpayPaymentId}` },

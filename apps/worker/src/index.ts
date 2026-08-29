@@ -67,11 +67,11 @@ export function startWorker() {
 
     const worker = new Worker(SLA_QUEUE_NAME, processSlaCheck, { connection });
 
-    worker.on('completed', (job) => {
-      console.log(`[Worker] SLA check job ${job.id} completed successfully.`);
+    worker.on('completed', (job: any) => {
+      console.log(`[Worker] SLA check job ${job?.id} completed successfully.`);
     });
 
-    worker.on('failed', (job, err) => {
+    worker.on('failed', (job: any, err: any) => {
       console.error(`[Worker] SLA check job ${job?.id} failed:`, err);
     });
 
@@ -85,7 +85,7 @@ export function startWorker() {
         },
       }
     );
-  }).catch((err) => {
+  }).catch((err: any) => {
     console.log('[Worker] Redis not available in current environment. Background worker in standby simulation mode.');
   });
 }

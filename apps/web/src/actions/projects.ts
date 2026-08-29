@@ -42,7 +42,7 @@ export async function acceptQuote(quoteId: string) {
     // Freeze Quote as ACCEPTED and Create Project in AWAITING_UPFRONT_PAYMENT
     const projectCode = `SKY-PRJ-${quote.quoteNumber.replace('Q-', '')}`;
 
-    const result = await db.$transaction(async (tx) => {
+    const result = await db.$transaction(async (tx: any) => {
       // 1. Update Quote to ACCEPTED (Frozen)
       const updatedQuote = await tx.quote.update({
         where: { id: quoteId },
@@ -160,7 +160,7 @@ export async function verifyAndProcessMilestonePayment(input: {
       if (!milestone) return { success: false, error: 'Milestone not found.' };
 
       if (milestone.type === MilestoneType.UPFRONT_50) {
-        await db.$transaction(async (tx) => {
+        await db.$transaction(async (tx: any) => {
           // Record Payment
           await tx.payment.create({
             data: {
@@ -216,7 +216,7 @@ export async function verifyAndProcessMilestonePayment(input: {
 
       // Handle Final Balance Payment
       if (milestone.type === MilestoneType.FINAL_BALANCE) {
-        await db.$transaction(async (tx) => {
+        await db.$transaction(async (tx: any) => {
           await tx.payment.create({
             data: {
               receiptNumber: `REC-${Date.now().toString().slice(-6)}`,
@@ -299,7 +299,7 @@ export async function requestProjectRevision(input: { projectId: string; descrip
 
     const revisionNumber = project.revisionsUsed + 1;
 
-    await db.$transaction(async (tx) => {
+    await db.$transaction(async (tx: any) => {
       await tx.revision.create({
         data: {
           projectId: project.id,
@@ -353,7 +353,7 @@ export async function approveChangeRequest(changeRequestId: string) {
 
     // Step 1: Customer Approves CR -> Moves to PAYMENT_REQUIRED (or APPLIED if ₹0)
     if (cr.additionalPricePaise === 0) {
-      await db.$transaction(async (tx) => {
+      await db.$transaction(async (tx: any) => {
         await tx.changeRequest.update({
           where: { id: cr.id },
           data: {

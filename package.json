@@ -20,6 +20,7 @@
     "db:push": "npm run db:push --workspace=@skyline/database",
     "db:migrate": "npm run db:migrate --workspace=@skyline/database",
     "db:seed": "npm run db:seed --workspace=@skyline/database",
+    "postinstall": "npm run db:generate --workspace=@skyline/database",
     "docker:up": "docker compose -f infrastructure/docker-compose.yml up -d",
     "docker:down": "docker compose -f infrastructure/docker-compose.yml down"
   },
