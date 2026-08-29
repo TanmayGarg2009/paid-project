@@ -1,0 +1,26 @@
+{
+  "name": "@skyline/worker",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "bullmq": "^5.41.6",
+    "ioredis": "^5.6.0",
+    "@skyline/database": "*",
+    "@skyline/types": "*",
+    "@skyline/config": "*",
+    "@skyline/notifications": "*",
+    "@skyline/shared": "*",
+    "@skyline/logging": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}

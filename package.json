@@ -1,0 +1,32 @@
+{
+  "name": "skyline-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Skyline Digital Services Platform — Production Monorepo",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev --workspace=@skyline/web",
+    "dev:admin": "npm run dev --workspace=@skyline/admin",
+    "dev:bot": "npm run dev --workspace=@skyline/discord-bot",
+    "build": "npm run build --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "test": "npx tsx --test tests/skyline.test.ts",
+    "test:e2e": "playwright test",
+    "db:generate": "npm run db:generate --workspace=@skyline/database",
+    "db:push": "npm run db:push --workspace=@skyline/database",
+    "db:migrate": "npm run db:migrate --workspace=@skyline/database",
+    "db:seed": "npm run db:seed --workspace=@skyline/database",
+    "docker:up": "docker compose -f infrastructure/docker-compose.yml up -d",
+    "docker:down": "docker compose -f infrastructure/docker-compose.yml down"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "typescript": "^5.7.3",
+    "prettier": "^3.5.1",
+    "tsx": "^4.19.3"
+  }
+}

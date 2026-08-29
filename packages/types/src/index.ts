@@ -1,0 +1,126 @@
+export enum UserRole {
+  OWNER = 'OWNER',
+  ADMIN = 'ADMIN',
+  SUPPORT = 'SUPPORT',
+  CUSTOMER = 'CUSTOMER',
+  CREATOR = 'CREATOR',
+}
+
+export enum RequestStatus {
+  REQUESTED = 'REQUESTED',
+  REVIEWING = 'REVIEWING',
+  QUOTED = 'QUOTED',
+  REJECTED = 'REJECTED',
+  EXPIRED = 'EXPIRED',
+}
+
+export enum QuoteStatus {
+  DRAFT = 'DRAFT',
+  SENT = 'SENT',
+  VIEWED = 'VIEWED',
+  ACCEPTED = 'ACCEPTED',
+  REJECTED = 'REJECTED',
+  SUPERSEDED = 'SUPERSEDED',
+  EXPIRED = 'EXPIRED',
+}
+
+export enum ProjectStatus {
+  REQUESTED = 'REQUESTED',
+  REVIEWING = 'REVIEWING',
+  QUOTED = 'QUOTED',
+  AWAITING_UPFRONT_PAYMENT = 'AWAITING_UPFRONT_PAYMENT',
+  UPFRONT_PAID = 'UPFRONT_PAID',
+  IN_PROGRESS = 'IN_PROGRESS',
+  INTERNAL_QA = 'INTERNAL_QA',
+  CUSTOMER_REVIEW = 'CUSTOMER_REVIEW',
+  REVISION = 'REVISION',
+  AWAITING_FINAL_PAYMENT = 'AWAITING_FINAL_PAYMENT',
+  FINAL_PAYMENT_RECEIVED = 'FINAL_PAYMENT_RECEIVED',
+  READY_FOR_DELIVERY = 'READY_FOR_DELIVERY',
+  DELIVERED = 'DELIVERED',
+  COMPLETED = 'COMPLETED',
+  ON_HOLD = 'ON_HOLD',
+  CANCELLED = 'CANCELLED',
+  DISPUTED = 'DISPUTED',
+  REJECTED = 'REJECTED',
+  EXPIRED = 'EXPIRED',
+}
+
+export enum MilestoneType {
+  UPFRONT_50 = 'UPFRONT_50',
+  FINAL_BALANCE = 'FINAL_BALANCE',
+  CHANGE_REQUEST = 'CHANGE_REQUEST',
+}
+
+export enum MilestoneStatus {
+  PENDING = 'PENDING',
+  READY_TO_PAY = 'READY_TO_PAY',
+  PAID = 'PAID',
+  CANCELLED = 'CANCELLED',
+}
+
+export enum PaymentStatus {
+  PENDING = 'PENDING',
+  CREATED = 'CREATED',
+  PROCESSING = 'PROCESSING',
+  PAID = 'PAID',
+  FAILED = 'FAILED',
+  REFUNDED = 'REFUNDED',
+  PARTIALLY_REFUNDED = 'PARTIALLY_REFUNDED',
+}
+
+export enum ChangeRequestStatus {
+  CR_CREATED = 'CR_CREATED',
+  CUSTOMER_APPROVED = 'CUSTOMER_APPROVED',
+  PAYMENT_REQUIRED = 'PAYMENT_REQUIRED',
+  PAYMENT_VERIFIED = 'PAYMENT_VERIFIED',
+  APPLIED = 'APPLIED',
+  REJECTED = 'REJECTED',
+  CANCELLED = 'CANCELLED',
+}
+
+export enum RevisionStatus {
+  REQUESTED = 'REQUESTED',
+  IN_PROGRESS = 'IN_PROGRESS',
+  COMPLETED = 'COMPLETED',
+  REJECTED = 'REJECTED',
+}
+
+export enum DeliverableAccessLevel {
+  PREVIEW_AVAILABLE = 'PREVIEW_AVAILABLE',
+  FINAL_LOCKED = 'FINAL_LOCKED',
+  FINAL_AVAILABLE = 'FINAL_AVAILABLE',
+  SOURCE_LOCKED = 'SOURCE_LOCKED',
+  SOURCE_AVAILABLE = 'SOURCE_AVAILABLE',
+}
+
+export enum DeliverableType {
+  PREVIEW_LINK = 'PREVIEW_LINK',
+  PREVIEW_FILE = 'PREVIEW_FILE',
+  FINAL_BUILD = 'FINAL_BUILD',
+  SOURCE_CODE_ARCHIVE = 'SOURCE_CODE_ARCHIVE',
+  DOCUMENTATION = 'DOCUMENTATION',
+}
+
+export enum TimelinePriority {
+  STANDARD = 'STANDARD',
+  EXPRESS = 'EXPRESS',
+  NEXT_DAY = 'NEXT_DAY',
+  FLEXIBLE = 'FLEXIBLE',
+}
+
+export interface AuthUser {
+  id: string;
+  email: string;
+  name: string | null;
+  role: UserRole;
+  phone?: string | null;
+  discordUsername?: string | null;
+}
+
+export interface ApiResponse<T = any> {
+  success: boolean;
+  data?: T;
+  error?: string;
+  message?: string;
+}
