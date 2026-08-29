@@ -4,13 +4,15 @@ import { db } from '@skyline/database';
 import { formatPaiseToINR } from '@skyline/shared';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 
+import { DEFAULT_SERVICES } from '@skyline/config';
+
 export const metadata = {
   title: 'Digital Development Services',
   description: 'Explore Skyline services across web applications, bots, AI systems, mobile apps, Minecraft, and backend architectures.',
 };
 
 export default async function ServicesPage() {
-  const categories = await db.serviceCategory.findMany({
+  const dbCategories = await db.serviceCategory.findMany({
     include: {
       services: {
         where: { isPublished: true },
@@ -19,6 +21,40 @@ export default async function ServicesPage() {
     },
     orderBy: { sortOrder: 'asc' },
   }).catch(() => []);
+
+  // Fallback if DB not seeded
+  const categories = dbCategories.length > 0 ? dbCategories : [
+    {
+      id: 'cat_web',
+      name: 'Websites & Web Apps',
+      description: 'High-performance modern web platforms, bespoke business websites, and scalable SaaS applications.',
+      services: DEFAULT_SERVICES.filter((s) => s.category.slug === 'websites-web-apps'),
+    },
+    {
+      id: 'cat_bot',
+      name: 'Bots & Automation',
+      description: 'Custom Discord bots, Telegram bots, workflow automations, and third-party API integrations.',
+      services: DEFAULT_SERVICES.filter((s) => s.category.slug === 'bots-automation'),
+    },
+    {
+      id: 'cat_ai',
+      name: 'AI & Intelligent Systems',
+      description: 'Custom AI chatbots, Retrieval-Augmented Generation (RAG) knowledge bases, and autonomous tool-calling agents.',
+      services: DEFAULT_SERVICES.filter((s) => s.category.slug === 'ai-systems'),
+    },
+    {
+      id: 'cat_mc',
+      name: 'Gaming & Minecraft Development',
+      description: 'Custom Paper/Purpur plugins, Fabric mods, network server architectures, and Tebex store integrations.',
+      services: DEFAULT_SERVICES.filter((s) => s.category.slug === 'gaming-minecraft'),
+    },
+    {
+      id: 'cat_other',
+      name: 'Backend, Mobile & Custom Engineering',
+      description: 'Hardened backend APIs, React Native cross-platform apps, and bespoke operational systems.',
+      services: DEFAULT_SERVICES.filter((s) => !['websites-web-apps', 'bots-automation', 'ai-systems', 'gaming-minecraft'].includes(s.category.slug)),
+    },
+  ];
 
   return (
     <div className="container mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 space-y-16">

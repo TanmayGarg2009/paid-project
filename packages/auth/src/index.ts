@@ -51,24 +51,32 @@ export async function createSession(userId: string, ipAddress?: string, userAgen
 export async function validateSession(token: string) {
   if (!token) return null;
 
-  const session = await db.session.findUnique({
-    where: { token },
-    include: { user: true },
-  });
+  try {
+    const session = await db.session.findUnique({
+      where: { token },
+      include: { user: true },
+    });
 
-  if (!session || session.expiresAt < new Date()) {
-    if (session) {
-      await db.session.delete({ where: { id: session.id } }).catch(() => {});
+    if (!session || session.expiresAt < new Date()) {
+      if (session) {
+        await db.session.delete({ where: { id: session.id } }).catch(() => {});
+      }
+      return null;
     }
+
+    return session;
+  } catch (error) {
     return null;
   }
-
-  return session;
 }
 
 export async function revokeSession(token: string) {
   if (!token) return;
-  await db.session.deleteMany({ where: { token } }).catch(() => {});
+  try {
+    await db.session.deleteMany({ where: { token } }).catch(() => {});
+  } catch (error) {
+    // Ignored in offline mode
+  }
 }
 
 // 3. Role Checking Helpers

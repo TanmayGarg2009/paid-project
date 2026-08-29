@@ -1,5 +1,9 @@
 import { PrismaClient } from '@prisma/client';
 
+if (!process.env.DATABASE_URL) {
+  process.env.DATABASE_URL = 'postgresql://skyline_user:skyline_pass_2026@localhost:5432/skyline_db?schema=public';
+}
+
 declare global {
   // eslint-disable-next-line no-var
   var prisma: PrismaClient | undefined;

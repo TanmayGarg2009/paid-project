@@ -4,7 +4,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { db } from '@skyline/database';
 import { formatPaiseToINR } from '@skyline/shared';
-import { BRAND_CONFIG } from '@skyline/config';
+import { BRAND_CONFIG, DEFAULT_SERVICES } from '@skyline/config';
 import { ArrowRight, CheckCircle2, Clock, ShieldCheck, FileCheck, HelpCircle } from 'lucide-react';
 
 interface Props {
@@ -13,9 +13,10 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const service = await db.service.findUnique({
+  const dbService = await db.service.findUnique({
     where: { slug },
   }).catch(() => null);
+  const service = dbService || DEFAULT_SERVICES.find((s) => s.slug === slug);
 
   if (!service) {
     return { title: 'Service Not Found' };
@@ -36,13 +37,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ServiceDetailPage({ params }: Props) {
   const { slug } = await params;
-  const service = await db.service.findUnique({
+  const dbService = await db.service.findUnique({
     where: { slug, isPublished: true },
     include: {
       category: true,
       faqs: { orderBy: { displayOrder: 'asc' } },
     },
   }).catch(() => null);
+
+  const fallbackService = DEFAULT_SERVICES.find((s) => s.slug === slug);
+  const service = dbService || fallbackService;
 
   if (!service) {
     notFound();
@@ -178,8 +182,8 @@ export default async function ServiceDetailPage({ params }: Props) {
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {service.faqs.map((faq) => (
-              <div key={faq.id} className="rounded-xl border border-border bg-card p-5 space-y-2 shadow-sm">
+            {service.faqs.map((faq: any, idx: number) => (
+              <div key={faq.id || idx} className="rounded-xl border border-border bg-card p-5 space-y-2 shadow-sm">
                 <h4 className="text-sm font-bold text-foreground">{faq.question}</h4>
                 <p className="text-xs text-muted-foreground leading-relaxed">{faq.answer}</p>
               </div>

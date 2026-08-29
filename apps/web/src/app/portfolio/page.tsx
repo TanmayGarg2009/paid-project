@@ -1,6 +1,7 @@
 import React from 'react';
 import { db } from '@skyline/database';
 import { formatDate } from '@skyline/shared';
+import { DEFAULT_PORTFOLIO } from '@skyline/config';
 import { ExternalLink } from 'lucide-react';
 
 export const metadata = {
@@ -9,11 +10,12 @@ export const metadata = {
 };
 
 export default async function PortfolioPage() {
-  const projects = await db.portfolioProject.findMany({
+  const dbProjects = await db.portfolioProject.findMany({
     where: { isPublished: true },
     include: { service: true },
     orderBy: { completedAt: 'desc' },
   }).catch(() => []);
+  const projects = dbProjects.length > 0 ? dbProjects : DEFAULT_PORTFOLIO;
 
   return (
     <div className="container mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 space-y-16">
@@ -60,7 +62,7 @@ export default async function PortfolioPage() {
 
             <div className="px-6 pb-6 pt-2 border-t border-border flex items-center justify-between">
               <span className="text-[10px] font-semibold text-muted-foreground">
-                Category: {proj.service?.title || 'Custom Engineering'}
+                Category: {(proj as any).service?.title || 'Custom Engineering'}
               </span>
               {proj.liveUrl && (
                 <a

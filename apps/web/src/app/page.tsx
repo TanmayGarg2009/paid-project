@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { db } from '@skyline/database';
 import { formatPaiseToINR } from '@skyline/shared';
-import { BRAND_CONFIG } from '@skyline/config';
+import { BRAND_CONFIG, DEFAULT_SERVICES, DEFAULT_PORTFOLIO, DEFAULT_REVIEWS } from '@skyline/config';
 import { 
   ArrowRight, 
   CheckCircle2, 
@@ -24,25 +24,28 @@ import {
 export const revalidate = 60; // Revalidate every minute
 
 export default async function HomePage() {
-  // Fetch published services from DB
-  const services = await db.service.findMany({
+  // Fetch published services from DB with safe fallback
+  const dbServices = await db.service.findMany({
     where: { isPublished: true },
     include: { category: true },
     orderBy: { category: { sortOrder: 'asc' } },
   }).catch(() => []);
+  const services = dbServices.length > 0 ? dbServices : DEFAULT_SERVICES;
 
-  // Fetch featured portfolio projects
-  const portfolioProjects = await db.portfolioProject.findMany({
+  // Fetch featured portfolio projects with safe fallback
+  const dbPortfolio = await db.portfolioProject.findMany({
     where: { isPublished: true, isFeatured: true },
     take: 3,
   }).catch(() => []);
+  const portfolioProjects = dbPortfolio.length > 0 ? dbPortfolio : DEFAULT_PORTFOLIO;
 
-  // Fetch verified customer reviews
-  const reviews = await db.review.findMany({
+  // Fetch verified customer reviews with safe fallback
+  const dbReviews = await db.review.findMany({
     where: { isPublished: true },
     include: { user: true, project: true },
     take: 4,
   }).catch(() => []);
+  const reviews = dbReviews.length > 0 ? dbReviews : DEFAULT_REVIEWS;
 
   // Category Icon Mapping
   const getCategoryIcon = (slug: string) => {
