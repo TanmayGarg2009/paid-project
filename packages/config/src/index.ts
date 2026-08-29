@@ -66,7 +66,9 @@ export const PROJECT_TYPES = [
   'Automation / Workflow',
   'Backend / API',
   'Database Architecture',
-  'Gaming / Minecraft',
+  'Minecraft Mod (Fabric / Forge / NeoForge)',
+  'Minecraft Plugin / Server Network',
+  'Gaming / Custom Mechanics',
   'Infrastructure / DevOps',
   'Custom Software',
   'Other',
@@ -144,19 +146,20 @@ export const DEFAULT_SERVICES = [
   },
   {
     id: 'srv_mc',
-    title: 'Bespoke Minecraft Paper/Purpur Plugin',
+    title: 'Minecraft Plugins, Mods & Server Systems',
     slug: 'minecraft-paper-plugin',
-    shortDescription: 'Optimized Minecraft server plugin with Adventure/MiniMessage rich formatting, custom GUIs, and database persistence.',
-    fullDescription: 'High-performance Minecraft plugin engineered for Paper/Purpur/Folia with asynchronous chunk operations, PersistentDataContainer (PDC) NBT handling, and strict 50ms tick-budget optimization.',
+    shortDescription: 'Custom Fabric & Forge mods, Paper/Purpur plugins, custom entities, blocks, and high-performance server network mechanics.',
+    fullDescription: 'Bespoke Minecraft engineering across client and server environments. We develop modern Fabric, NeoForge, and Forge mods (Mixins, custom items/blocks, screen handlers, networking packets) as well as optimized Paper/Purpur plugins with asynchronous chunk loading, PDC NBT structures, and 50ms tick-budget guarantees.',
     startingPricePaise: 1200000,
     estimatedDaysDefault: 5,
-    features: ['Paper API & MiniMessage Rich Text', 'Asynchronous Database Queries', 'Custom Inventory Menus & PDC', 'Folia Multi-Threaded Compatibility'],
-    deliverableTypes: ['Compiled JAR Plugin', 'Clean Java/Kotlin Source Code', 'Configuration YAML'],
+    features: ['Fabric, Forge & NeoForge Mod Development', 'Paper, Spigot & Purpur Server Plugins', 'Custom Entities, Blocks, Items & Screen Handlers', 'Mixins & Packet Synchronization', 'Folia Multi-Threaded Support', 'High-Performance 20 TPS Optimization'],
+    deliverableTypes: ['Compiled Mod / Plugin JAR files', 'Full Java/Kotlin Source Code', 'Loom/Gradle Build Files', 'Configuration & Asset Package'],
     isFeatured: true,
     isPublished: true,
     category: { name: 'Gaming & Minecraft', slug: 'gaming-minecraft' },
     faqs: [
-      { question: 'Which Minecraft versions are supported?', answer: 'We build for modern versions (1.20.x, 1.21+) as well as legacy versions (1.8.8, 1.12.2, 1.16.5).' }
+      { question: 'Do you develop client-side and server-side Minecraft mods?', answer: 'Yes, we develop client mods, server-side Fabric/Forge mods, custom GUI screen handlers, and hybrid client-server packet synchronization systems.' },
+      { question: 'Which Minecraft versions and mod loaders are supported?', answer: 'We support Fabric, NeoForge, Forge, Quilt, Paper, Purpur, Spigot, and Velocity across modern (1.20.x, 1.21+) and legacy versions (1.8.9, 1.12.2, 1.16.5).' }
     ]
   },
   {
