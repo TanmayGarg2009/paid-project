@@ -118,7 +118,7 @@ export default function CustomerRegisterPage() {
 
         <div className="text-center pt-2 border-t border-border text-xs text-muted-foreground">
           Already have an account?{' '}
-          <Link href="/auth/login" className="font-bold text-accent hover:underline">
+          <Link href="/login" className="font-bold text-accent hover:underline">
             Sign in
           </Link>
         </div>

@@ -8,10 +8,16 @@
     "packages/*"
   ],
   "scripts": {
+    "dev": "npm run dev --workspace=@skyline/web",
     "dev:web": "npm run dev --workspace=@skyline/web",
     "dev:admin": "npm run dev --workspace=@skyline/admin",
     "dev:bot": "npm run dev --workspace=@skyline/discord-bot",
+    "start": "npm run start --workspace=@skyline/web",
+    "start:web": "npm run start --workspace=@skyline/web",
+    "start:admin": "npm run start --workspace=@skyline/admin",
     "build": "npm run build --workspaces --if-present",
+    "build:web": "npm run build --workspace=@skyline/web",
+    "build:admin": "npm run build --workspace=@skyline/admin",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "lint": "npm run lint --workspaces --if-present",
     "test": "npx tsx --test tests/skyline.test.ts",

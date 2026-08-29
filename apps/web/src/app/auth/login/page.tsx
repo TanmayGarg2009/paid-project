@@ -88,7 +88,7 @@ export default function CustomerLoginPage() {
 
         <div className="text-center pt-2 border-t border-border text-xs text-muted-foreground">
           Don't have an account yet?{' '}
-          <Link href="/auth/register" className="font-bold text-accent hover:underline">
+          <Link href="/register" className="font-bold text-accent hover:underline">
             Register here
           </Link>
         </div>
