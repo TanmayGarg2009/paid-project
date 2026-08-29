@@ -61,7 +61,9 @@ export function Footer() {
 
         <div className="mt-12 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between text-[11px] text-muted-foreground gap-4">
           <p>© {new Date().getFullYear()} Skyline Digital Services. All rights reserved.</p>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 sm:gap-6">
+            <Link href="/llms.txt" className="hover:text-foreground font-mono font-medium">llms.txt</Link>
+            <Link href="/llms-full.txt" className="hover:text-foreground font-mono font-medium">llms-full.txt</Link>
             <span>Estimated delivery timelines apply per agreed quote.</span>
           </div>
         </div>
