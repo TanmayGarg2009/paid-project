@@ -77,24 +77,3 @@
   background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.08) 0%, rgba(37, 99, 235, 0.02) 50%, transparent 80%);
 }
 
-@keyframes pulseTrace {
-  0% {
-    stroke-dashoffset: 100;
-  }
-  100% {
-    stroke-dashoffset: 0;
-  }
-}
-
-.animate-pulse-trace {
-  stroke-dasharray: 8, 8;
-  animation: pulseTrace 20s linear infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-pulse-trace,
-  .animate-pulse {
-    animation: none !important;
-  }
-}
-
