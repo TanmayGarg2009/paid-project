@@ -13,12 +13,12 @@ export function Navbar() {
       <div className="container mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-2.5 font-bold tracking-tight text-foreground transition-opacity hover:opacity-90">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm">
             <Layers className="h-5 w-5" />
           </div>
           <div className="flex flex-col">
-            <span className="text-lg font-extrabold tracking-wider leading-none">SKYLINE</span>
-            <span className="text-[10px] font-medium text-muted-foreground tracking-widest uppercase leading-none mt-1">Digital Services</span>
+            <span className="text-base font-black tracking-wider leading-none">SKYLINE DIGITAL</span>
+            <span className="text-[10px] font-medium text-muted-foreground tracking-wider leading-none mt-1">Digital Product Studio</span>
           </div>
         </Link>
 

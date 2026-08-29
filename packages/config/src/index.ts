@@ -1,7 +1,7 @@
 export const BRAND_CONFIG = {
-  name: 'Skyline',
+  name: 'Skyline Digital',
   tagline: 'You have the idea. We build the technology.',
-  description: 'Skyline builds websites, applications, bots, AI systems, automation, and custom software for people and businesses that need technology built around their needs.',
+  description: 'Skyline Digital builds websites, mobile apps, bots, AI tools and custom software — designed, built and delivered around what you actually need.',
   domain: 'skyline.dev',
   url: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
   adminUrl: process.env.NEXT_PUBLIC_ADMIN_URL || 'http://localhost:3001',
