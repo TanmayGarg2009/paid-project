@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { db } from '@skyline/database';
 import { BRAND_CONFIG, DEFAULT_SERVICES, DEFAULT_PORTFOLIO, DEFAULT_REVIEWS } from '@skyline/config';
 import { NorthStackLogo } from '@/components/ui/NorthStackLogo';
-import { HeroProductShowcase } from '@/components/home/HeroProductShowcase';
+import { HeroSystemShowcase } from '@/components/home/HeroSystemShowcase';
 import { MetricsTicker } from '@/components/home/MetricsTicker';
 import { InteractiveProjectEstimator } from '@/components/home/InteractiveProjectEstimator';
 import { ServicesBentoGrid } from '@/components/home/ServicesBentoGrid';
@@ -126,9 +126,9 @@ export default async function HomePage() {
 
             </div>
 
-            {/* Right Column: Interactive Digital Product Showcase */}
+            {/* Right Column: Live Production Systems Showcase */}
             <div className="lg:col-span-6">
-              <HeroProductShowcase />
+              <HeroSystemShowcase />
             </div>
 
           </div>
