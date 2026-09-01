@@ -223,3 +223,50 @@ describe('5. OAuth 2.0 & OIDC Flow Security', () => {
   });
 });
 
+describe('6. Email OTP Verification Engine & Security', () => {
+  const { generate6DigitOtp, createAndStoreOtp, verifyOtpCode } = require('../apps/web/src/lib/otp-store');
+
+  test('generates valid 6-digit numeric OTP codes', () => {
+    const code = generate6DigitOtp();
+    assert.equal(code.length, 6);
+    assert.match(code, /^\d{6}$/);
+  });
+
+  test('creates, stores, and validates OTP code successfully', () => {
+    const testEmail = 'client.test@northstackdigitals.com';
+    const createRes = createAndStoreOtp(testEmail);
+    assert.equal(createRes.success, true);
+    assert.ok(createRes.otp);
+    assert.equal(createRes.expiresInMinutes, 5);
+
+    // Verify correct OTP
+    const verifyRes = verifyOtpCode(testEmail, createRes.otp);
+    assert.equal(verifyRes.valid, true);
+
+    // Verifying again should fail as OTP was already consumed
+    const reVerifyRes = verifyOtpCode(testEmail, createRes.otp);
+    assert.equal(reVerifyRes.valid, false);
+  });
+
+  test('enforces rate limiting cooldown on duplicate OTP requests', () => {
+    const rateLimitEmail = 'ratelimit@northstackdigitals.com';
+    const firstRes = createAndStoreOtp(rateLimitEmail);
+    assert.equal(firstRes.success, true);
+
+    // Immediate second request within 60s must fail
+    const secondRes = createAndStoreOtp(rateLimitEmail);
+    assert.equal(secondRes.success, false);
+    assert.ok(secondRes.cooldownRemainingSeconds! > 0);
+  });
+
+  test('rejects incorrect OTP and counts attempts', () => {
+    const incorrectEmail = 'wrong-otp@northstackdigitals.com';
+    createAndStoreOtp(incorrectEmail);
+
+    const fail1 = verifyOtpCode(incorrectEmail, '000000');
+    assert.equal(fail1.valid, false);
+    assert.match(fail1.error!, /attempt.*remaining/i);
+  });
+});
+
+

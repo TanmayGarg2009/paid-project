@@ -6,16 +6,18 @@ import { useRouter } from 'next/navigation';
 import { loginCustomer } from '@/actions/auth';
 import { NorthStackLogo } from '@/components/ui/NorthStackLogo';
 import { OAuthButtons } from '@/components/auth/OAuthButtons';
-import { ArrowRight, AlertCircle } from 'lucide-react';
+import { OtpLoginForm } from '@/components/auth/OtpLoginForm';
+import { ArrowRight, AlertCircle, Mail, KeyRound } from 'lucide-react';
 
 export default function CustomerLoginPage() {
   const router = useRouter();
+  const [authMethod, setAuthMethod] = useState<'otp' | 'password'>('otp');
   const [isPending, startTransition] = useTransition();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmitPassword = (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage(null);
 
@@ -41,55 +43,91 @@ export default function CustomerLoginPage() {
           <p className="text-xs text-muted-foreground">Access your active projects, milestone invoices, and code vaults.</p>
         </div>
 
-        {errorMessage && (
-          <div className="rounded-xl border border-destructive/30 bg-destructive/5 p-3.5 text-xs text-destructive flex items-center gap-2">
-            <AlertCircle className="h-4 w-4 shrink-0" />
-            <span>{errorMessage}</span>
-          </div>
-        )}
-
         {/* OAuth Social Login Buttons (Google, GitHub, Microsoft) */}
         <OAuthButtons mode="login" />
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-1.5">
-            <label className="text-xs font-bold text-foreground">Email Address</label>
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="alex@example.com"
-              className="w-full rounded-xl border border-input bg-background px-3.5 py-2.5 text-xs text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-            />
-          </div>
-
-          <div className="space-y-1.5">
-            <div className="flex items-center justify-between">
-              <label className="text-xs font-bold text-foreground">Password</label>
-            </div>
-            <input
-              type="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              className="w-full rounded-xl border border-input bg-background px-3.5 py-2.5 text-xs text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-            />
-          </div>
-
+        {/* Auth Method Switcher Tabs */}
+        <div className="grid grid-cols-2 p-1 rounded-xl bg-secondary/80 border border-border/80 text-xs font-bold">
           <button
-            type="submit"
-            disabled={isPending}
-            className="w-full rounded-xl bg-primary py-3 text-xs font-bold text-primary-foreground shadow transition-all hover:bg-primary/90 disabled:opacity-50 flex items-center justify-center gap-2"
+            type="button"
+            onClick={() => {
+              setAuthMethod('otp');
+              setErrorMessage(null);
+            }}
+            className={`py-2 rounded-lg flex items-center justify-center gap-1.5 transition-all ${
+              authMethod === 'otp'
+                ? 'bg-background text-foreground shadow-sm'
+                : 'text-muted-foreground hover:text-foreground'
+            }`}
           >
-            {isPending ? 'Authenticating...' : (
-              <>
-                Sign In to Portal <ArrowRight className="h-3.5 w-3.5" />
-              </>
-            )}
+            <Mail className="h-3.5 w-3.5 text-accent" /> One-Time Code
           </button>
-        </form>
+          <button
+            type="button"
+            onClick={() => {
+              setAuthMethod('password');
+              setErrorMessage(null);
+            }}
+            className={`py-2 rounded-lg flex items-center justify-center gap-1.5 transition-all ${
+              authMethod === 'password'
+                ? 'bg-background text-foreground shadow-sm'
+                : 'text-muted-foreground hover:text-foreground'
+            }`}
+          >
+            <KeyRound className="h-3.5 w-3.5" /> Password
+          </button>
+        </div>
+
+        {authMethod === 'otp' ? (
+          <OtpLoginForm mode="login" />
+        ) : (
+          <form onSubmit={handleSubmitPassword} className="space-y-4">
+            {errorMessage && (
+              <div className="rounded-xl border border-destructive/30 bg-destructive/5 p-3.5 text-xs text-destructive flex items-center gap-2">
+                <AlertCircle className="h-4 w-4 shrink-0" />
+                <span>{errorMessage}</span>
+              </div>
+            )}
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-foreground">Email Address</label>
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="alex@example.com"
+                className="w-full rounded-xl border border-input bg-background px-3.5 py-2.5 text-xs text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-bold text-foreground">Password</label>
+              </div>
+              <input
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                className="w-full rounded-xl border border-input bg-background px-3.5 py-2.5 text-xs text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={isPending}
+              className="w-full rounded-xl bg-primary py-3 text-xs font-bold text-primary-foreground shadow transition-all hover:bg-primary/90 disabled:opacity-50 flex items-center justify-center gap-2"
+            >
+              {isPending ? 'Authenticating...' : (
+                <>
+                  Sign In with Password <ArrowRight className="h-3.5 w-3.5" />
+                </>
+              )}
+            </button>
+          </form>
+        )}
 
         <div className="text-center pt-2 border-t border-border text-xs text-muted-foreground">
           Don't have an account yet?{' '}

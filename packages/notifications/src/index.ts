@@ -205,3 +205,6 @@ export async function notifyNewReviewSubmitted({
     url: `${BRAND_CONFIG.adminUrl}/reviews`,
   });
 }
+
+export * from './email';
+

@@ -32,8 +32,12 @@
   },
   "devDependencies": {
     "@types/node": "^22.13.4",
-    "typescript": "^5.7.3",
+    "@types/nodemailer": "^8.0.1",
     "prettier": "^3.5.1",
-    "tsx": "^4.19.3"
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "nodemailer": "^9.1.0"
   }
 }
