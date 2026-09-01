@@ -47,7 +47,7 @@ export function getProviderConfig(provider: OAuthProvider): OAuthProviderConfig 
   switch (provider) {
     case 'google':
       return {
-        clientId: process.env.GOOGLE_CLIENT_ID || '',
+        clientId: process.env.GOOGLE_CLIENT_ID || process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '',
         clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
         authorizationUrl: 'https://accounts.google.com/o/oauth2/v2/auth',
         tokenUrl: 'https://oauth2.googleapis.com/token',
@@ -56,7 +56,7 @@ export function getProviderConfig(provider: OAuthProvider): OAuthProviderConfig 
       };
     case 'github':
       return {
-        clientId: process.env.GITHUB_CLIENT_ID || '',
+        clientId: process.env.GITHUB_CLIENT_ID || process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID || '',
         clientSecret: process.env.GITHUB_CLIENT_SECRET || '',
         authorizationUrl: 'https://github.com/login/oauth/authorize',
         tokenUrl: 'https://github.com/login/oauth/access_token',
@@ -66,8 +66,8 @@ export function getProviderConfig(provider: OAuthProvider): OAuthProviderConfig 
     case 'microsoft':
       const tenant = process.env.MICROSOFT_TENANT_ID || 'common';
       return {
-        clientId: process.env.MICROSOFT_CLIENT_ID || '',
-        clientSecret: process.env.MICROSOFT_CLIENT_SECRET || '',
+        clientId: process.env.MICROSOFT_CLIENT_ID || process.env.NEXT_PUBLIC_MICROSOFT_CLIENT_ID || process.env.AZURE_CLIENT_ID || '',
+        clientSecret: process.env.MICROSOFT_CLIENT_SECRET || process.env.AZURE_CLIENT_SECRET || '',
         authorizationUrl: `https://login.microsoftonline.com/${tenant}/oauth2/v2.0/authorize`,
         tokenUrl: `https://login.microsoftonline.com/${tenant}/oauth2/v2.0/token`,
         userInfoUrl: 'https://graph.microsoft.com/v1.0/me',

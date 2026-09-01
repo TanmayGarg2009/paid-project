@@ -4,6 +4,7 @@ import {
   OAuthProvider,
   getBaseUrl,
   getRedirectUri,
+  getProviderConfig,
   generateOAuthState,
   buildAuthorizationUrl,
 } from '@/lib/oauth';
@@ -23,6 +24,15 @@ export async function GET(
   }
 
   const oauthProvider = provider as OAuthProvider;
+  const config = getProviderConfig(oauthProvider);
+
+  if (!config.clientId) {
+    const errorMsg = encodeURIComponent(
+      `${provider.toUpperCase()}_CLIENT_ID is not configured in Vercel Environment Variables. Please add it to your Vercel Project Settings.`
+    );
+    return NextResponse.redirect(new URL(`/login?error=${errorMsg}`, request.url));
+  }
+
   const searchParams = request.nextUrl.searchParams;
   const returnTo = searchParams.get('return_to') || '/dashboard';
 
