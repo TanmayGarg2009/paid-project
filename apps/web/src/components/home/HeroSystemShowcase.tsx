@@ -169,7 +169,7 @@ export function HeroSystemShowcase() {
                 <span className="text-emerald-400">✓</span> milestone: <span className="text-slate-200">100% code delivery verified</span>
               </p>
               <p className="text-slate-400">
-                <span className="text-purple-400">⚡</span> stack: <span className="text-slate-200">Next.js 15 • TypeScript • PostgreSQL</span>
+                <span className="text-purple-400">⚡</span> stack: <span className="text-slate-200">Next.js 15 • TypeScript • MySQL / Node.js</span>
               </p>
             </div>
           </div>

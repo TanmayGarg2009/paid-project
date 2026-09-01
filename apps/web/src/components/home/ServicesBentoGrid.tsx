@@ -135,12 +135,12 @@ export function ServicesBentoGrid({ services }: Props) {
             {featuredServices.map((service) => (
               <div
                 key={service.id}
-                className="group relative flex flex-col justify-between rounded-3xl border border-border/90 bg-card p-7 shadow-sm transition-all duration-300 hover:border-accent/60 hover:shadow-xl"
+                className="group relative flex flex-col justify-between rounded-3xl border border-border/90 bg-card p-7 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/60 hover:shadow-xl overflow-hidden"
               >
                 <div className="space-y-5">
                   {/* Card Header */}
                   <div className="flex items-center justify-between">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/10 border border-accent/20 group-hover:scale-105 transition-transform">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/10 border border-accent/20 group-hover:scale-110 group-hover:bg-accent/20 transition-all duration-200">
                       {getServiceIcon(service.slug)}
                     </div>
                     <span className="rounded-full bg-secondary px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
@@ -202,11 +202,11 @@ export function ServicesBentoGrid({ services }: Props) {
             {secondaryServices.map((service) => (
               <div
                 key={service.id}
-                className="group flex flex-col justify-between rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:border-accent/50 hover:shadow-md"
+                className="group flex flex-col justify-between rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-accent/50 hover:shadow-md"
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-secondary border border-border">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-secondary border border-border group-hover:scale-105 transition-transform">
                       {getServiceIcon(service.slug)}
                     </div>
                     <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider">
@@ -234,7 +234,7 @@ export function ServicesBentoGrid({ services }: Props) {
 
                   <Link
                     href={`/services/${service.slug}`}
-                    className="inline-flex items-center gap-1 text-xs font-bold text-accent hover:underline"
+                    className="inline-flex items-center gap-1 text-xs font-bold text-accent hover:underline group-hover:translate-x-0.5 transition-transform"
                   >
                     View Spec <ArrowRight className="h-3 w-3" />
                   </Link>
@@ -249,7 +249,7 @@ export function ServicesBentoGrid({ services }: Props) {
           {filteredServices.map((service) => (
             <div
               key={service.id}
-              className="group flex flex-col justify-between rounded-3xl border border-border bg-card p-6 shadow-sm transition-all duration-200 hover:border-accent/60 hover:shadow-lg"
+              className="group flex flex-col justify-between rounded-3xl border border-border bg-card p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-accent/60 hover:shadow-lg"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">

@@ -10,6 +10,7 @@ import { ServicesBentoGrid } from '@/components/home/ServicesBentoGrid';
 import { CustomerProcessTimeline } from '@/components/home/CustomerProcessTimeline';
 import { NotSureWhatYouNeed } from '@/components/home/NotSureWhatYouNeed';
 import { PortfolioShowcase } from '@/components/home/PortfolioShowcase';
+import { VerifiedReviewsSection } from '@/components/home/VerifiedReviewsSection';
 import { 
   ArrowRight, 
   CheckCircle2, 
@@ -390,69 +391,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 10. VERIFIED MILESTONE REVIEWS */}
-      {reviews.length > 0 && (
-        <section id="reviews" className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-10">
-          <div className="text-center space-y-3 max-w-2xl mx-auto">
-            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-accent font-mono">
-              <Star className="h-4 w-4 text-amber-500 fill-amber-500" /> VERIFIED CLIENT FEEDBACK
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-foreground">
-              What clients say about NorthStack Digitals
-            </h2>
-            <p className="text-sm text-muted-foreground">
-              Genuine feedback tied directly to completed, verified NorthStack milestone deliverables.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {reviews.map((rev) => (
-              <div
-                key={rev.id}
-                className="flex flex-col justify-between rounded-3xl border border-border bg-card p-7 shadow-sm space-y-4 hover:border-accent/40 transition-all"
-              >
-                <div className="space-y-3">
-                  <div className="flex items-center gap-1 text-amber-500">
-                    {Array.from({ length: rev.rating }).map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-amber-500" />
-                    ))}
-                  </div>
-                  <h4 className="text-base font-bold text-foreground">"{rev.headline}"</h4>
-                  <p className="text-xs text-muted-foreground leading-relaxed">
-                    {rev.comment}
-                  </p>
-                  {(rev as any).proofImage && (
-                    <div className="pt-2">
-                      <div className="rounded-xl border border-border/80 bg-secondary/30 p-2 max-w-xs">
-                        <span className="text-[9px] font-mono font-bold uppercase text-muted-foreground block mb-1">
-                          Verified Client Chat Proof:
-                        </span>
-                        <img
-                          src={(rev as any).proofImage}
-                          alt="Verified client proof"
-                          className="rounded-lg w-full object-cover border border-border/60"
-                        />
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                <div className="pt-4 border-t border-border flex items-center justify-between text-xs">
-                  <div className="flex flex-col">
-                    <span className="font-bold text-foreground">{rev.user?.name || 'Verified Client'}</span>
-                    <span className="text-[10px] text-muted-foreground font-mono">
-                      Project: {rev.project?.title || 'Milestone Deliverable'}
-                    </span>
-                  </div>
-                  <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-600 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
-                    <CheckCircle2 className="h-3 w-3" /> Verified Project
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
+      {/* 10. VERIFIED MILESTONE REVIEWS & DISCORD CHAT PROOFS */}
+      <VerifiedReviewsSection reviews={reviews} />
 
       {/* 11. FINAL CONVERSION BANNER */}
       <section className="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center space-y-6">
