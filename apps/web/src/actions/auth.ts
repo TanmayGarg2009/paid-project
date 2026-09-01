@@ -117,6 +117,8 @@ export async function getCurrentCustomer() {
     email: session.user.email,
     name: session.user.name,
     role: session.user.role,
+    avatarUrl: session.user.avatarUrl,
+    oauthProvider: (session.user as any).oauthProvider,
     discordUsername: session.user.discordUsername,
     phone: session.user.phone,
   };

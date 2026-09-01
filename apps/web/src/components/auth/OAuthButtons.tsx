@@ -14,7 +14,7 @@ export function OAuthButtons({ mode = 'login' }: OAuthButtonsProps) {
   const handleOAuth = (provider: 'google' | 'github' | 'microsoft') => {
     setLoadingProvider(provider);
     // Direct to the provider initiation endpoint
-    window.location.href = `/api/auth/oauth/${provider}?mode=${mode}`;
+    window.location.href = `/api/auth/login/${provider}?mode=${mode}`;
   };
 
   const actionText = mode === 'register' ? 'Sign up' : 'Sign in';

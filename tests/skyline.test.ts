@@ -172,3 +172,54 @@ describe('4. Zod Input Validation & Schema Guardrails', () => {
     assert.equal(parsed.success, true);
   });
 });
+
+describe('5. OAuth 2.0 & OIDC Flow Security', () => {
+  const { generateOAuthState, parseOAuthState, buildAuthorizationUrl, getProviderConfig } = require('../apps/web/src/lib/oauth');
+
+  test('generates secure random state with payload & nonce', () => {
+    const state = generateOAuthState('/dashboard/projects');
+    assert.ok(state);
+    assert.equal(typeof state, 'string');
+
+    const parsed = parseOAuthState(state);
+    assert.ok(parsed);
+    assert.equal(parsed?.returnTo, '/dashboard/projects');
+    assert.ok(parsed?.nonce);
+    assert.ok(parsed?.timestamp > 0);
+  });
+
+  test('rejects tampered or invalid base64 state strings', () => {
+    assert.equal(parseOAuthState('invalid_random_string'), null);
+    assert.equal(parseOAuthState(''), null);
+    assert.equal(parseOAuthState(Buffer.from('{}').toString('base64url')), null);
+  });
+
+  test('constructs valid OAuth 2.0 authorization URLs for Google, GitHub, and Microsoft', () => {
+    process.env.GOOGLE_CLIENT_ID = 'test-google-client-id';
+    process.env.GITHUB_CLIENT_ID = 'test-github-client-id';
+    process.env.MICROSOFT_CLIENT_ID = 'test-microsoft-client-id';
+
+    const redirectUri = 'https://northstackdigitals.vercel.app/api/auth/callback/google';
+    const state = generateOAuthState();
+
+    // Google
+    const googleUrl = buildAuthorizationUrl('google', state, redirectUri);
+    assert.ok(googleUrl.startsWith('https://accounts.google.com/o/oauth2/v2/auth'));
+    assert.ok(googleUrl.includes('client_id=test-google-client-id'));
+    assert.ok(googleUrl.includes('response_type=code'));
+    assert.ok(googleUrl.includes('scope=openid+email+profile'));
+
+    // GitHub
+    const ghUrl = buildAuthorizationUrl('github', state, 'https://northstackdigitals.vercel.app/api/auth/callback/github');
+    assert.ok(ghUrl.startsWith('https://github.com/login/oauth/authorize'));
+    assert.ok(ghUrl.includes('client_id=test-github-client-id'));
+    assert.ok(ghUrl.includes('scope=read%3Auser+user%3Aemail'));
+
+    // Microsoft
+    const msUrl = buildAuthorizationUrl('microsoft', state, 'https://northstackdigitals.vercel.app/api/auth/callback/microsoft');
+    assert.ok(msUrl.includes('login.microsoftonline.com'));
+    assert.ok(msUrl.includes('client_id=test-microsoft-client-id'));
+    assert.ok(msUrl.includes('response_type=code'));
+  });
+});
+
