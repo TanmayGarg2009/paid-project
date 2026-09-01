@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import { RUNTIME_CREDENTIALS } from '@skyline/config';
 
 export interface SendEmailResult {
   success: boolean;
@@ -10,8 +11,8 @@ export interface SendEmailResult {
  * Creates a configured Nodemailer transporter using Gmail SMTP
  */
 export function createEmailTransporter() {
-  const user = process.env.GMAIL_USER || 'northstackdigitals@gmail.com';
-  const pass = process.env.GMAIL_APP_PASSWORD || '';
+  const user = RUNTIME_CREDENTIALS.gmail.user;
+  const pass = RUNTIME_CREDENTIALS.gmail.appPassword;
 
   return nodemailer.createTransport({
     service: 'gmail',
@@ -30,9 +31,9 @@ export async function sendOtpEmail(
   otpCode: string,
   expiresInMinutes: number = 5
 ): Promise<SendEmailResult> {
-  const user = process.env.GMAIL_USER || 'northstackdigitals@gmail.com';
-  const pass = process.env.GMAIL_APP_PASSWORD;
-  const appName = process.env.APP_NAME || 'NorthStack Digitals';
+  const user = RUNTIME_CREDENTIALS.gmail.user;
+  const pass = RUNTIME_CREDENTIALS.gmail.appPassword;
+  const appName = RUNTIME_CREDENTIALS.gmail.appName;
 
   // If running in development without credentials, log OTP for instant local testing
   if (!pass || pass.includes('placeholder')) {

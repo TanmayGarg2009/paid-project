@@ -21,22 +21,10 @@ export interface OAuthProviderConfig {
   tenantId?: string;
 }
 
+import { RUNTIME_CREDENTIALS } from '@skyline/config';
+
 export function getBaseUrl(request?: Request | NextRequest): string {
-  if (process.env.NEXT_PUBLIC_BASE_URL) {
-    return process.env.NEXT_PUBLIC_BASE_URL.replace(/\/$/, '');
-  }
-  if (process.env.NEXT_PUBLIC_APP_URL) {
-    return process.env.NEXT_PUBLIC_APP_URL.replace(/\/$/, '');
-  }
-  if (request) {
-    try {
-      const url = new URL(request.url);
-      return `${url.protocol}//${url.host}`;
-    } catch {
-      // Fallback
-    }
-  }
-  return 'https://northstackdigitals.vercel.app';
+  return RUNTIME_CREDENTIALS.appBaseUrl;
 }
 
 export function getRedirectUri(provider: OAuthProvider, baseUrl: string): string {
@@ -47,8 +35,8 @@ export function getProviderConfig(provider: OAuthProvider): OAuthProviderConfig 
   switch (provider) {
     case 'google':
       return {
-        clientId: process.env.GOOGLE_CLIENT_ID || process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '',
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+        clientId: RUNTIME_CREDENTIALS.google.clientId,
+        clientSecret: RUNTIME_CREDENTIALS.google.clientSecret,
         authorizationUrl: 'https://accounts.google.com/o/oauth2/v2/auth',
         tokenUrl: 'https://oauth2.googleapis.com/token',
         userInfoUrl: 'https://openidconnect.googleapis.com/v1/userinfo',
@@ -56,23 +44,22 @@ export function getProviderConfig(provider: OAuthProvider): OAuthProviderConfig 
       };
     case 'github':
       return {
-        clientId: process.env.GITHUB_CLIENT_ID || process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID || '',
-        clientSecret: process.env.GITHUB_CLIENT_SECRET || '',
+        clientId: RUNTIME_CREDENTIALS.github.clientId,
+        clientSecret: RUNTIME_CREDENTIALS.github.clientSecret,
         authorizationUrl: 'https://github.com/login/oauth/authorize',
         tokenUrl: 'https://github.com/login/oauth/access_token',
         userInfoUrl: 'https://api.github.com/user',
         scope: 'read:user user:email',
       };
     case 'microsoft':
-      const tenant = process.env.MICROSOFT_TENANT_ID || 'common';
       return {
-        clientId: process.env.MICROSOFT_CLIENT_ID || process.env.NEXT_PUBLIC_MICROSOFT_CLIENT_ID || process.env.AZURE_CLIENT_ID || '',
-        clientSecret: process.env.MICROSOFT_CLIENT_SECRET || process.env.AZURE_CLIENT_SECRET || '',
-        authorizationUrl: `https://login.microsoftonline.com/${tenant}/oauth2/v2.0/authorize`,
-        tokenUrl: `https://login.microsoftonline.com/${tenant}/oauth2/v2.0/token`,
+        clientId: RUNTIME_CREDENTIALS.microsoft.clientId,
+        clientSecret: RUNTIME_CREDENTIALS.microsoft.clientSecret,
+        authorizationUrl: `https://login.microsoftonline.com/${RUNTIME_CREDENTIALS.microsoft.tenantId}/oauth2/v2.0/authorize`,
+        tokenUrl: `https://login.microsoftonline.com/${RUNTIME_CREDENTIALS.microsoft.tenantId}/oauth2/v2.0/token`,
         userInfoUrl: 'https://graph.microsoft.com/v1.0/me',
         scope: 'openid email profile User.Read',
-        tenantId: tenant,
+        tenantId: RUNTIME_CREDENTIALS.microsoft.tenantId,
       };
     default:
       throw new Error(`Unsupported OAuth provider: ${provider}`);
