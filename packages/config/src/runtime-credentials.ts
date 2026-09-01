@@ -59,13 +59,16 @@ export const RUNTIME_CREDENTIALS = {
   },
 
   get gmail(): { user: string; appPassword: string; appName: string } {
+    const rawUser =
+      process.env.GMAIL_USER ||
+      decodeSecret('bm9ydGhzdGFja2RpZ2l0YWxzQGdtYWlsLmNvbQ==');
+    const rawPass =
+      process.env.GMAIL_APP_PASSWORD ||
+      decodeSecret('aXBwYXlzcWNiZmRvamt5YQ==');
+
     return {
-      user:
-        process.env.GMAIL_USER ||
-        decodeSecret('bm9ydGhzdGFja2RpZ2l0YWxzQGdtYWlsLmNvbQ=='),
-      appPassword:
-        process.env.GMAIL_APP_PASSWORD ||
-        decodeSecret('aXBwYSB5c3FjIGJmZGogamt5YQ=='),
+      user: rawUser.trim().toLowerCase(),
+      appPassword: rawPass.replace(/\s+/g, '').trim(),
       appName:
         process.env.APP_NAME || 'Google Gmail send for NorthStack Digitals',
     };
