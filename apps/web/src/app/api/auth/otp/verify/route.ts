@@ -37,6 +37,7 @@ export async function POST(request: NextRequest) {
     }
 
     // 2. Lookup or create customer account
+    const pending = validation.pendingRegistration;
     let user = await db.user.findUnique({
       where: { email: normalizedEmail },
     });
@@ -45,8 +46,19 @@ export async function POST(request: NextRequest) {
       user = await db.user.create({
         data: {
           email: normalizedEmail,
-          name: name || normalizedEmail.split('@')[0],
+          name: name || pending?.name || normalizedEmail.split('@')[0],
+          passwordHash: pending?.passwordHash || null,
+          phone: pending?.phone || null,
+          discordUsername: pending?.discordUsername || null,
           role: UserRole.CUSTOMER,
+        },
+      });
+    } else if (pending?.passwordHash && !user.passwordHash) {
+      user = await db.user.update({
+        where: { id: user.id },
+        data: {
+          passwordHash: pending.passwordHash,
+          name: pending.name || user.name,
         },
       });
     }

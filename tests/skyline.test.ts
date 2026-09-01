@@ -267,6 +267,24 @@ describe('6. Email OTP Verification Engine & Security', () => {
     assert.equal(fail1.valid, false);
     assert.match(fail1.error!, /attempt.*remaining/i);
   });
+
+  test('stores and returns pending registration data with password upon OTP verification', () => {
+    const regEmail = 'new-user-register@northstackdigitals.com';
+    const pendingData = {
+      name: 'Jordan Smith',
+      email: regEmail,
+      passwordHash: 'sample_hashed_password_123',
+      discordUsername: 'jordan_s#9999',
+    };
+
+    const createRes = createAndStoreOtp(regEmail, pendingData);
+    assert.equal(createRes.success, true);
+    assert.ok(createRes.otp);
+
+    const verifyRes = verifyOtpCode(regEmail, createRes.otp);
+    assert.equal(verifyRes.valid, true);
+    assert.deepEqual(verifyRes.pendingRegistration, pendingData);
+  });
 });
 
 

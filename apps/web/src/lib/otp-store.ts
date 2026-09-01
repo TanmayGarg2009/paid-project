@@ -1,11 +1,20 @@
 import crypto from 'node:crypto';
 
+export interface PendingRegistrationData {
+  name: string;
+  email: string;
+  passwordHash?: string;
+  discordUsername?: string;
+  phone?: string;
+}
+
 export interface OtpRecord {
   email: string;
   otp: string;
   expiresAt: number;
   attempts: number;
   lastRequestedAt: number;
+  pendingRegistration?: PendingRegistrationData;
 }
 
 // Global cache map preserved across HMR in Next.js development
@@ -30,9 +39,12 @@ export function generate6DigitOtp(): string {
 }
 
 /**
- * Generate and store OTP for email with rate limiting and TTL
+ * Generate and store OTP for email with rate limiting, TTL, and optional pending registration
  */
-export function createAndStoreOtp(rawEmail: string): {
+export function createAndStoreOtp(
+  rawEmail: string,
+  pendingRegistration?: PendingRegistrationData
+): {
   success: boolean;
   otp?: string;
   expiresInMinutes: number;
@@ -64,6 +76,7 @@ export function createAndStoreOtp(rawEmail: string): {
     expiresAt: now + OTP_TTL_MS,
     attempts: 0,
     lastRequestedAt: now,
+    pendingRegistration: pendingRegistration || existing?.pendingRegistration,
   });
 
   return {
@@ -74,12 +87,16 @@ export function createAndStoreOtp(rawEmail: string): {
 }
 
 /**
- * Verify user submitted OTP code
+ * Verify user submitted OTP code and return any pending registration data
  */
 export function verifyOtpCode(
   rawEmail: string,
   rawEnteredOtp: string
-): { valid: boolean; error?: string } {
+): { 
+  valid: boolean; 
+  error?: string;
+  pendingRegistration?: PendingRegistrationData;
+} {
   const email = rawEmail.toLowerCase().trim();
   const enteredOtp = (rawEnteredOtp || '').trim();
   const now = Date.now();
@@ -129,9 +146,11 @@ export function verifyOtpCode(
     };
   }
 
+  const pendingRegistration = record.pendingRegistration;
+
   // Success - consume OTP
   otpCache.delete(email);
-  return { valid: true };
+  return { valid: true, pendingRegistration };
 }
 
 /**
