@@ -29,7 +29,7 @@ export function PortfolioShowcase({ projects }: Props) {
       {projects.map((proj, idx) => (
         <article
           key={proj.id}
-          className="group flex flex-col justify-between overflow-hidden rounded-3xl border border-border/90 bg-card shadow-sm transition-all duration-300 hover:border-accent/60 hover:shadow-xl"
+          className="group flex flex-col justify-between overflow-hidden rounded-3xl border border-border/90 bg-card shadow-sm transition-all duration-300 hover:border-accent/60 hover:shadow-xl hover-lift"
         >
           <div>
             {/* Browser Chrome Header Frame */}
@@ -41,10 +41,10 @@ export function PortfolioShowcase({ projects }: Props) {
               </div>
               <div className="flex items-center gap-1.5 rounded-md bg-background px-3 py-1 text-[10px] font-mono text-muted-foreground border border-border/60 max-w-[200px] truncate">
                 <Globe className="h-3 w-3 text-accent shrink-0" />
-                <span className="truncate">{proj.liveUrl?.replace('https://', '') || 'skyline-build.internal'}</span>
+                <span className="truncate">{proj.liveUrl ? proj.liveUrl.replace(/^https?:\/\//, '').replace(/\/$/, '') : 'northstack.dev'}</span>
               </div>
-              <span className="text-[10px] font-bold text-muted-foreground font-mono">
-                CASE #{idx + 1}
+              <span className="text-[10px] font-bold text-accent font-mono">
+                CASE #{String(idx + 1).padStart(2, '0')}
               </span>
             </div>
 
@@ -66,7 +66,7 @@ export function PortfolioShowcase({ projects }: Props) {
             <div className="p-6 space-y-4">
               <div className="flex items-center justify-between text-xs text-muted-foreground">
                 <span className="font-semibold text-accent">
-                  {(proj as any).service?.title || 'Custom Engineering'}
+                  {(proj as any).service?.title || 'Custom Solution'}
                 </span>
                 <span className="font-mono text-[11px]">{formatDate(proj.completedAt)}</span>
               </div>
@@ -78,13 +78,27 @@ export function PortfolioShowcase({ projects }: Props) {
               <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">
                 {proj.summary}
               </p>
+
+              {/* Tags */}
+              {(proj as any).tags && (proj as any).tags.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {(proj as any).tags.slice(0, 3).map((tag: string, i: number) => (
+                    <span
+                      key={i}
+                      className="text-[10px] font-mono font-medium px-2 py-0.5 rounded-md bg-secondary text-secondary-foreground border border-border/60"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 
           {/* Card Footer */}
           <div className="px-6 pb-6 pt-3 border-t border-border/60 flex items-center justify-between">
             <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase text-emerald-600 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
-              <CheckCircle2 className="h-3 w-3" /> Delivered
+              <CheckCircle2 className="h-3 w-3" /> Live & Verified
             </span>
 
             {proj.liveUrl ? (

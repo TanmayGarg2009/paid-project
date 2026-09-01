@@ -421,6 +421,20 @@ export default async function HomePage() {
                   <p className="text-xs text-muted-foreground leading-relaxed">
                     {rev.comment}
                   </p>
+                  {(rev as any).proofImage && (
+                    <div className="pt-2">
+                      <div className="rounded-xl border border-border/80 bg-secondary/30 p-2 max-w-xs">
+                        <span className="text-[9px] font-mono font-bold uppercase text-muted-foreground block mb-1">
+                          Verified Client Chat Proof:
+                        </span>
+                        <img
+                          src={(rev as any).proofImage}
+                          alt="Verified client proof"
+                          className="rounded-lg w-full object-cover border border-border/60"
+                        />
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <div className="pt-4 border-t border-border flex items-center justify-between text-xs">

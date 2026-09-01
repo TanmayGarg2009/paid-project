@@ -4,7 +4,9 @@ import React, { useState, useTransition } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { loginCustomer } from '@/actions/auth';
-import { Layers, ArrowRight, AlertCircle, Lock } from 'lucide-react';
+import { NorthStackLogo } from '@/components/ui/NorthStackLogo';
+import { OAuthButtons } from '@/components/auth/OAuthButtons';
+import { ArrowRight, AlertCircle } from 'lucide-react';
 
 export default function CustomerLoginPage() {
   const router = useRouter();
@@ -29,14 +31,14 @@ export default function CustomerLoginPage() {
   };
 
   return (
-    <div className="container mx-auto max-w-md px-4 py-20">
-      <div className="rounded-3xl border border-border bg-card p-8 shadow-sm space-y-6">
+    <div className="container mx-auto max-w-md px-4 py-16 sm:py-20">
+      <div className="rounded-3xl border border-border bg-card p-6 sm:p-8 shadow-sm space-y-6">
         <div className="text-center space-y-2">
-          <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm">
-            <Layers className="h-5 w-5" />
+          <div className="flex justify-center pb-1">
+            <NorthStackLogo size="md" showText={false} />
           </div>
-          <h1 className="text-2xl font-extrabold tracking-tight text-foreground">Sign in to Skyline</h1>
-          <p className="text-xs text-muted-foreground">Access your active projects, milestone invoices, and files.</p>
+          <h1 className="text-2xl font-black tracking-tight text-foreground">Sign in to NorthStack</h1>
+          <p className="text-xs text-muted-foreground">Access your active projects, milestone invoices, and code vaults.</p>
         </div>
 
         {errorMessage && (
@@ -45,6 +47,9 @@ export default function CustomerLoginPage() {
             <span>{errorMessage}</span>
           </div>
         )}
+
+        {/* OAuth Social Login Buttons (Google, GitHub, Microsoft) */}
+        <OAuthButtons mode="login" />
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-1.5">
