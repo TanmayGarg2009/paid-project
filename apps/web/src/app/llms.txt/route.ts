@@ -6,10 +6,10 @@ export const dynamic = 'force-static';
 export const revalidate = 3600; // 1 hour
 
 export async function GET() {
-  const markdown = `# Skyline — Custom Digital Development & Engineering
+  const markdown = `# NorthStack Digitals — Custom Digital Development & Engineering
 > ${BRAND_CONFIG.tagline}
 
-Skyline is a digital development agency that builds bespoke software, websites, web applications, bots, AI systems, automation, and backend infrastructure.
+NorthStack Digitals is a premier digital engineering studio that builds bespoke software, websites, web applications, mobile apps, bots, AI systems, automation, Minecraft mods, and backend infrastructure.
 
 ## Operating Model & Guarantees
 - **50/50 Milestone Model:** 50% upfront deposit activates development architecture. Remaining 50% balance is due only upon customer review and approval of the staging preview.
@@ -33,7 +33,7 @@ ${DEFAULT_SERVICES.map((s) => `
 1. **Intake Request:** Client visits [${BRAND_CONFIG.url}/start-project](${BRAND_CONFIG.url}/start-project) and specifies project type, goals, desired feature list, budget range, and timeline SLA.
 2. **Itemized Quote:** Lead engineer reviews requirements within 24 hours and issues a frozen, versioned quote with deliverables, scope, exclusions, and target delivery date.
 3. **50% Deposit:** Client reviews and accepts quote, paying 50% via secure Razorpay checkout to start building.
-4. **Development & Preview:** Skyline builds the software and delivers a live preview link for internal QA & customer review.
+4. **Development & Preview:** NorthStack Digitals builds the software and delivers a live preview link for internal QA & customer review.
 5. **Final 50% & Vault Unlock:** Client approves the build, completes the remaining 50% balance, and unlocks the source code archive and production deployment.
 
 ## Verified Portfolio Case Studies

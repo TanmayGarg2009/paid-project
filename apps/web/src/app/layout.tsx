@@ -31,14 +31,24 @@ export const metadata: Metadata = {
     siteName: BRAND_CONFIG.name,
     locale: 'en_IN',
     type: 'website',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'NorthStack Digitals — Custom Technology Studio',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: `${BRAND_CONFIG.name} — ${BRAND_CONFIG.tagline}`,
     description: BRAND_CONFIG.description,
+    images: ['/og-image.jpg'],
   },
   icons: {
-    icon: '/favicon.ico',
+    icon: '/icon.jpg',
+    apple: '/icon.jpg',
   },
 };
 
@@ -53,7 +63,8 @@ export default function RootLayout({
     name: BRAND_CONFIG.name,
     description: BRAND_CONFIG.description,
     url: BRAND_CONFIG.url,
-    logo: `${BRAND_CONFIG.url}/favicon.ico`,
+    logo: `${BRAND_CONFIG.url}/logo.jpg`,
+    image: `${BRAND_CONFIG.url}/banner.jpg`,
     email: BRAND_CONFIG.supportEmail,
     priceRange: '₹₹₹',
     knowsAbout: [

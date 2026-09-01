@@ -94,5 +94,5 @@ export const CHANGE_REQUEST_STATUS_MAP: Record<ChangeRequestStatus, { label: str
 export function generateTrackingCode(): string {
   const year = new Date().getFullYear();
   const randomHex = Math.floor(1000 + Math.random() * 9000).toString();
-  return `SKY-${year}-${randomHex}`;
+  return `NSTK-${year}-${randomHex}`;
 }

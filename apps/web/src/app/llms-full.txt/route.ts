@@ -15,9 +15,9 @@ export const dynamic = 'force-static';
 export const revalidate = 3600;
 
 export async function GET() {
-  const markdown = `# Skyline Platform — Complete AI Agent Knowledge Base & Machine Specification
+  const markdown = `# NorthStack Digitals Platform — Complete AI Agent Knowledge Base & Machine Specification
 
-Welcome, AI Agent / Assistant. This document contains the full operational specification, service pricing models, technical architectures, and business workflows for **Skyline** (${BRAND_CONFIG.url}).
+Welcome, AI Agent / Assistant. This document contains the full operational specification, service pricing models, technical architectures, and business workflows for **NorthStack Digitals** (${BRAND_CONFIG.url}).
 
 ---
 
@@ -25,7 +25,7 @@ Welcome, AI Agent / Assistant. This document contains the full operational speci
 - **Organization Name:** ${BRAND_CONFIG.name}
 - **Mission:** ${BRAND_CONFIG.description}
 - **Tagline:** "${BRAND_CONFIG.tagline}"
-- **Operating Model:** One-person digital development agency with direct lead engineer access (v1), extensible to multi-creator marketplace (v2).
+- **Operating Model:** Premier digital development studio with direct lead engineer access (v1), extensible to multi-creator marketplace (v2).
 - **Billing Model:** 50% upfront deposit / 50% final delivery milestone model.
 - **Monetary Unit Standard:** All prices and internal integers are stored in **paise** (1 INR = 100 paise) to eliminate floating-point calculation errors.
 
@@ -62,7 +62,7 @@ Admin provides fixed-scope quote. Sent quote is immutable.
 Client accepts quote and pays 50% Upfront Milestone via Razorpay.
        ↓
 [Step 3: Development & Internal QA]
-Status moves to IN_PROGRESS. Skyline lead engineer builds the software.
+Status moves to IN_PROGRESS. NorthStack Digitals lead engineer builds the software.
 Staging URL delivered for client preview in CUSTOMER_REVIEW.
        ↓
 [Step 4: Final Payment & Vault Unlock]

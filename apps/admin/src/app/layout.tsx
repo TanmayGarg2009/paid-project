@@ -17,8 +17,8 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Skyline Operations Admin Panel',
-  description: 'Operations control and project lifecycle management for Skyline digital services.',
+  title: 'NorthStack Operations Admin Panel',
+  description: 'Operations control and project lifecycle management for NorthStack Digitals.',
 };
 
 export default async function AdminLayout({
@@ -43,7 +43,7 @@ export default async function AdminLayout({
                     <Layers className="h-4 w-4" />
                   </div>
                   <div>
-                    <span className="text-sm font-extrabold tracking-wider">SKYLINE OPS</span>
+                    <span className="text-sm font-extrabold tracking-wider">NORTHSTACK OPS</span>
                     <span className="text-[10px] text-accent block uppercase font-bold leading-none mt-0.5">Agency Admin</span>
                   </div>
                 </Link>

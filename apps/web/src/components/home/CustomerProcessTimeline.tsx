@@ -22,7 +22,7 @@ interface Step {
   summary: string;
   icon: any;
   whatYouDo: string;
-  whatSkylineDoes: string;
+  whatNorthStackDoes: string;
   highlightBadge: string;
 }
 
@@ -34,7 +34,7 @@ const STEPS: Step[] = [
     summary: 'Explain your idea or the problem you are trying to solve in plain English. No technical specification or upfront fee required.',
     icon: MessageSquare,
     whatYouDo: 'Describe your vision, desired pages/features, and timeline goal.',
-    whatSkylineDoes: 'Reviews your requirements and prepares an architecture plan.',
+    whatNorthStackDoes: 'Reviews your requirements and prepares an architecture plan.',
     highlightBadge: 'Free Project Brief',
   },
   {
@@ -44,7 +44,7 @@ const STEPS: Step[] = [
     summary: 'We provide an itemized quote detailing exact deliverables, delivery dates, and price before any work begins.',
     icon: FileCheck,
     whatYouDo: 'Review the fixed quote and scope checklist.',
-    whatSkylineDoes: 'Freezes the scope and reserves your development sprint.',
+    whatNorthStackDoes: 'Freezes the scope and reserves your development sprint.',
     highlightBadge: '24h Turnaround',
   },
   {
@@ -54,17 +54,17 @@ const STEPS: Step[] = [
     summary: 'No huge 100% upfront commitment. Pay 50% to activate development. The rest is due only upon final delivery.',
     icon: CreditCard,
     whatYouDo: 'Pay 50% upfront via secure checkout.',
-    whatSkylineDoes: 'Immediately initializes your codebase and starts building.',
+    whatNorthStackDoes: 'Immediately initializes your codebase and starts building.',
     highlightBadge: '50% Milestone',
   },
   {
     stepNumber: '04',
     title: 'We build it',
     subtitle: 'Direct communication',
-    summary: 'Skyline Digital designs, codes and tests your product. You can follow progress and communicate directly with the builder.',
+    summary: 'NorthStack Digitals designs, codes and tests your product. You can follow progress and communicate directly with the builder.',
     icon: Hammer,
     whatYouDo: 'Answer quick design preference questions if needed.',
-    whatSkylineDoes: 'Builds full-stack software and runs automated test suites.',
+    whatNorthStackDoes: 'Builds full-stack software and runs automated test suites.',
     highlightBadge: 'Active Sprint',
   },
   {
@@ -74,7 +74,7 @@ const STEPS: Step[] = [
     summary: 'You test a real, working preview link on your own devices. Your included revisions happen before final delivery.',
     icon: Eye,
     whatYouDo: 'Test the live preview link and request any tweaks.',
-    whatSkylineDoes: 'Applies your revisions until agreed scope is satisfied.',
+    whatNorthStackDoes: 'Applies your revisions until agreed scope is satisfied.',
     highlightBadge: '2 Free Revisions',
   },
   {
@@ -84,7 +84,7 @@ const STEPS: Step[] = [
     summary: 'Once you are satisfied with the preview and approve the build, settle the remaining 50% balance.',
     icon: CheckCircle2,
     whatYouDo: 'Approve the finished build and settle remaining balance.',
-    whatSkylineDoes: 'Prepares final build artifacts and repository archives.',
+    whatNorthStackDoes: 'Prepares final build artifacts and repository archives.',
     highlightBadge: 'Approval Gate',
   },
   {
@@ -94,7 +94,7 @@ const STEPS: Step[] = [
     summary: 'Everything included in the agreement—live deployment on your domain, source code, and assets—is handed over to you.',
     icon: PackageCheck,
     whatYouDo: 'Take full ownership of your live product and files.',
-    whatSkylineDoes: 'Deploys to your domain and delivers full documentation.',
+    whatNorthStackDoes: 'Deploys to your domain and delivers full documentation.',
     highlightBadge: '100% Live',
   },
 ];
@@ -184,10 +184,10 @@ export function CustomerProcessTimeline() {
 
               <div className="p-3.5 rounded-xl border border-accent/20 bg-accent/5 space-y-1">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-accent">
-                  What Skyline Digital does:
+                  What NorthStack Digitals does:
                 </span>
                 <p className="text-xs font-semibold text-foreground">
-                  {current.whatSkylineDoes}
+                  {current.whatNorthStackDoes}
                 </p>
               </div>
             </div>

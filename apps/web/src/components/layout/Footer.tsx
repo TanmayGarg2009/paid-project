@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { Layers } from 'lucide-react';
 import { BRAND_CONFIG } from '@skyline/config';
+import { NorthStackLogo } from '@/components/ui/NorthStackLogo';
 
 export function Footer() {
   return (
@@ -10,12 +10,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand Col */}
           <div className="space-y-4 md:col-span-1">
-            <div className="flex items-center gap-2.5 font-bold tracking-tight">
-              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm">
-                <Layers className="h-4 w-4" />
-              </div>
-              <span className="text-base font-black tracking-wider">SKYLINE DIGITAL</span>
-            </div>
+            <NorthStackLogo size="sm" showText={true} />
             <p className="text-xs text-muted-foreground leading-relaxed">
               Digital products, built around your needs.
             </p>
@@ -42,6 +37,7 @@ export function Footer() {
             <ul className="space-y-2 text-xs text-muted-foreground">
               <li><Link href="/start-project" className="hover:text-foreground">Start a Project</Link></li>
               <li><Link href="/portfolio" className="hover:text-foreground">Case Studies</Link></li>
+              <li><Link href="/#estimator" className="hover:text-foreground">Project Estimator</Link></li>
               <li><Link href="/#how-it-works" className="hover:text-foreground">How It Works (50/50 Model)</Link></li>
               <li><Link href="/#reviews" className="hover:text-foreground">Verified Reviews</Link></li>
               <li><Link href="/dashboard" className="hover:text-foreground">Client Portal</Link></li>
@@ -53,14 +49,14 @@ export function Footer() {
             <h4 className="text-xs font-bold uppercase tracking-wider text-foreground">Connect</h4>
             <ul className="space-y-2 text-xs text-muted-foreground">
               <li>Email: <a href={`mailto:${BRAND_CONFIG.supportEmail}`} className="text-foreground hover:underline font-semibold">{BRAND_CONFIG.supportEmail}</a></li>
-              <li>Discord: <a href={BRAND_CONFIG.social.discord} target="_blank" rel="noreferrer" className="text-foreground hover:underline">Skyline Community</a></li>
+              <li>Discord: <a href={BRAND_CONFIG.social.discord} target="_blank" rel="noreferrer" className="text-foreground hover:underline">NorthStack Community</a></li>
               <li>Working Hours: Mon – Sat (Global Sync)</li>
             </ul>
           </div>
         </div>
 
         <div className="mt-12 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between text-[11px] text-muted-foreground gap-4">
-          <p>© {new Date().getFullYear()} Skyline Digital. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} NorthStack Digitals. All rights reserved.</p>
           <div className="flex flex-wrap items-center gap-4 sm:gap-6">
             <Link href="/llms.txt" className="hover:text-foreground font-mono font-medium">llms.txt</Link>
             <Link href="/llms-full.txt" className="hover:text-foreground font-mono font-medium">llms-full.txt</Link>

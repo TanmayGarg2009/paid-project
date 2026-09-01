@@ -34,8 +34,8 @@ export default function AdminLoginPage() {
           <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm">
             <Layers className="h-5 w-5" />
           </div>
-          <h1 className="text-2xl font-extrabold tracking-tight text-foreground">Skyline Operations Command</h1>
-          <p className="text-xs text-muted-foreground">Restricted to authorized Skyline administrative personnel.</p>
+          <h1 className="text-2xl font-extrabold tracking-tight text-foreground">NorthStack Operations Command</h1>
+          <p className="text-xs text-muted-foreground">Restricted to authorized NorthStack Digitals administrative personnel.</p>
         </div>
 
         {errorMessage && (

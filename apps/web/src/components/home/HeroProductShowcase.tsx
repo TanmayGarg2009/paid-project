@@ -118,7 +118,7 @@ export function HeroProductShowcase() {
         <div className="flex items-center gap-2">
           <span className="flex h-2.5 w-2.5 rounded-full bg-accent animate-pulse" />
           <span className="text-xs font-bold uppercase tracking-wider text-foreground">
-            What Skyline Digital Builds:
+            What NorthStack Digitals Builds:
           </span>
         </div>
 
@@ -159,7 +159,7 @@ export function HeroProductShowcase() {
                 <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/60" />
               </div>
               <span className="text-[11px] font-mono text-muted-foreground font-semibold">
-                preview.skyline.dev/{active.id}
+                preview.northstack.dev/{active.id}
               </span>
             </div>
             <span className="rounded-full bg-accent/10 px-2.5 py-0.5 text-[10px] font-bold text-accent">
@@ -225,7 +225,7 @@ export function HeroProductShowcase() {
               Turn your concept into a real {active.category.toLowerCase()}.
             </h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              No technical expertise needed on your end. Just explain your idea in plain English, and Skyline Digital engineers the complete, ready-to-use product.
+              No technical expertise needed on your end. Just explain your idea in plain English, and NorthStack Digitals engineers the complete, ready-to-use product.
             </p>
           </div>
 

@@ -26,7 +26,7 @@ if (!token || token.includes('dummy') || !clientId) {
       .setDescription('List all pending project requests awaiting quotation review'),
     new SlashCommandBuilder()
       .setName('active')
-      .setDescription('List all active Skyline projects in development'),
+      .setDescription('List all active NorthStack projects in development'),
   ].map((command) => command.toJSON());
 
   const rest = new REST({ version: '10' }).setToken(token);
@@ -46,7 +46,7 @@ if (!token || token.includes('dummy') || !clientId) {
   })();
 
   client.on('ready', () => {
-    console.log(`[Discord Bot] Logged in as ${client.user?.tag}! Operations bot ready.`);
+    console.log(`[Discord Bot] Logged in as ${client.user?.tag}! NorthStack operations bot ready.`);
   });
 
   client.on('interactionCreate', async (interaction) => {
@@ -79,7 +79,7 @@ if (!token || token.includes('dummy') || !clientId) {
           { name: 'Deposit Paid', value: `${formatPaiseToINR(project.upfrontPaidPaise)} (50%)`, inline: true },
           { name: 'Revisions', value: `${project.revisionsUsed} / ${project.revisionsIncluded} used`, inline: true }
         )
-        .setFooter({ text: 'Skyline Digital Services • 2026' })
+        .setFooter({ text: 'NorthStack Digitals • 2026' })
         .setTimestamp();
 
       await interaction.reply({ embeds: [embed] });
@@ -103,7 +103,7 @@ if (!token || token.includes('dummy') || !clientId) {
             .map((r) => `• **${r.trackingCode}** — ${r.name} (${r.projectType}) | Budget: ${r.budgetRange}`)
             .join('\n')
         )
-        .setFooter({ text: 'Open Skyline Admin to build itemized quotes.' });
+        .setFooter({ text: 'Open NorthStack Admin to build itemized quotes.' });
 
       await interaction.reply({ embeds: [embed] });
     } else if (commandName === 'active') {

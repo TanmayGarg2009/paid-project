@@ -2,7 +2,10 @@ import React from 'react';
 import Link from 'next/link';
 import { db } from '@skyline/database';
 import { BRAND_CONFIG, DEFAULT_SERVICES, DEFAULT_PORTFOLIO, DEFAULT_REVIEWS } from '@skyline/config';
+import { NorthStackLogo } from '@/components/ui/NorthStackLogo';
 import { HeroProductShowcase } from '@/components/home/HeroProductShowcase';
+import { MetricsTicker } from '@/components/home/MetricsTicker';
+import { InteractiveProjectEstimator } from '@/components/home/InteractiveProjectEstimator';
 import { ServicesBentoGrid } from '@/components/home/ServicesBentoGrid';
 import { CustomerProcessTimeline } from '@/components/home/CustomerProcessTimeline';
 import { NotSureWhatYouNeed } from '@/components/home/NotSureWhatYouNeed';
@@ -21,7 +24,8 @@ import {
   Award,
   Users,
   Code2,
-  PackageCheck
+  PackageCheck,
+  Calculator
 } from 'lucide-react';
 
 export const revalidate = 60; // Revalidate every minute
@@ -64,9 +68,9 @@ export default async function HomePage() {
             <div className="lg:col-span-6 space-y-6 text-left">
               
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-bold text-foreground shadow-sm">
+              <div className="inline-flex items-center gap-2.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-bold text-foreground shadow-sm">
                 <span className="flex h-2 w-2 rounded-full bg-accent animate-pulse" />
-                <span className="font-extrabold uppercase tracking-wider">SKYLINE DIGITAL</span>
+                <span className="font-black uppercase tracking-wider">NORTHSTACK DIGITALS</span>
                 <span className="text-border">•</span>
                 <span className="text-muted-foreground font-medium">Digital Product Studio</span>
               </div>
@@ -92,10 +96,11 @@ export default async function HomePage() {
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <a
-                  href="#what-we-build"
+                  href="#estimator"
                   className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-card px-8 py-4 text-sm font-bold text-foreground transition-all hover:bg-secondary"
                 >
-                  See What We Build
+                  <Calculator className="h-4 w-4 text-accent" />
+                  Estimate Price
                 </a>
               </div>
 
@@ -128,10 +133,20 @@ export default async function HomePage() {
 
           </div>
 
+          {/* Metrics & Trust Ticker */}
+          <div className="pt-6">
+            <MetricsTicker />
+          </div>
+
         </div>
       </section>
 
-      {/* 2. IMMEDIATELY VISIBLE SERVICE SECTION ("What can we build for you?") */}
+      {/* 2. TRANSPARENT PROJECT ESTIMATOR SECTION */}
+      <section id="estimator" className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <InteractiveProjectEstimator />
+      </section>
+
+      {/* 3. IMMEDIATELY VISIBLE SERVICE SECTION ("What can we build for you?") */}
       <section id="what-we-build" className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="text-center space-y-3 max-w-2xl mx-auto">
           <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-accent font-mono">
@@ -148,7 +163,7 @@ export default async function HomePage() {
         <ServicesBentoGrid services={services} />
       </section>
 
-      {/* 3. THE 50/50 MODEL SECTION (TRUST & CONFIDENCE) */}
+      {/* 4. THE 50/50 MODEL SECTION (TRUST & CONFIDENCE) */}
       <section id="pricing-model" className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="rounded-3xl border border-border/80 bg-card p-8 sm:p-14 shadow-lg space-y-10">
           
@@ -213,7 +228,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 4. SPEED & TIMELINES */}
+      {/* 5. SPEED & TIMELINES */}
       <section className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-10">
         <div className="text-center space-y-3 max-w-2xl mx-auto">
           <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-accent font-mono">
@@ -232,7 +247,7 @@ export default async function HomePage() {
             <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Standard Delivery</span>
             <p className="text-2xl font-black text-foreground">~1–2 Weeks</p>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Ideal for full web applications, mobile apps, complex Minecraft systems, and AI document tools.
+              Ideal for full web platforms, mobile apps, complex Minecraft systems, and AI document tools.
             </p>
           </div>
 
@@ -254,7 +269,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 5. "HOW IT WORKS" (7-STEP STORY) */}
+      {/* 6. "HOW IT WORKS" (7-STEP STORY) */}
       <section id="how-it-works" className="border-y border-border/80 bg-secondary/20 py-24 relative">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-14">
           <div className="text-center space-y-3 max-w-2xl mx-auto">
@@ -262,7 +277,7 @@ export default async function HomePage() {
               <Layers className="h-4 w-4" /> SIMPLE 7-STEP PROCESS
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-foreground">
-              How Skyline Digital Works
+              How NorthStack Digitals Works
             </h2>
             <p className="text-sm sm:text-base text-muted-foreground">
               From your initial idea to live product delivery, our workflow is simple, transparent, and hassle-free.
@@ -273,12 +288,12 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 6. "NOT SURE WHAT YOU NEED?" INTERACTIVE SECTION */}
+      {/* 7. "NOT SURE WHAT YOU NEED?" INTERACTIVE SECTION */}
       <section className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <NotSureWhatYouNeed />
       </section>
 
-      {/* 7. PORTFOLIO SHOWCASE ("From idea to something real") */}
+      {/* 8. PORTFOLIO SHOWCASE ("From idea to something real") */}
       {portfolioProjects.length > 0 && (
         <section id="portfolio" className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
@@ -302,15 +317,15 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* 8. WHY SKYLINE DIGITAL (6 GROUNDED VALUE PILLARS) */}
-      <section id="why-skyline" className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* 9. WHY NORTHSTACK DIGITALS (6 GROUNDED VALUE PILLARS) */}
+      <section id="why-northstack" className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="rounded-3xl border border-border bg-primary text-primary-foreground p-8 sm:p-14 space-y-10 shadow-xl">
           <div className="max-w-2xl space-y-3">
             <span className="text-xs font-mono font-bold uppercase tracking-widest text-accent">
-              THE SKYLINE DIFFERENCE
+              THE NORTHSTACK STANDARD
             </span>
             <h2 className="text-3xl sm:text-4xl font-black tracking-tight">
-              Why work with Skyline Digital?
+              Why work with NorthStack Digitals?
             </h2>
             <p className="text-sm text-primary-foreground/80 leading-relaxed">
               We focus on building reliable software with predictable milestone payments and direct communication.
@@ -332,7 +347,7 @@ export default async function HomePage() {
                 <MessageSquare className="h-4 w-4 text-accent" /> Direct Communication
               </h4>
               <p className="text-xs text-primary-foreground/70 leading-relaxed">
-                No middleman managers. You communicate directly with Skyline throughout development.
+                No middleman managers. You communicate directly with NorthStack throughout development.
               </p>
             </div>
 
@@ -375,7 +390,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 9. VERIFIED MILESTONE REVIEWS */}
+      {/* 10. VERIFIED MILESTONE REVIEWS */}
       {reviews.length > 0 && (
         <section id="reviews" className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="text-center space-y-3 max-w-2xl mx-auto">
@@ -383,10 +398,10 @@ export default async function HomePage() {
               <Star className="h-4 w-4 text-amber-500 fill-amber-500" /> VERIFIED CLIENT FEEDBACK
             </div>
             <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-foreground">
-              What clients say about Skyline Digital
+              What clients say about NorthStack Digitals
             </h2>
             <p className="text-sm text-muted-foreground">
-              Genuine feedback tied directly to completed, verified Skyline milestone deliverables.
+              Genuine feedback tied directly to completed, verified NorthStack milestone deliverables.
             </p>
           </div>
 
@@ -425,7 +440,7 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* 10. FINAL CONVERSION BANNER */}
+      {/* 11. FINAL CONVERSION BANNER */}
       <section className="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center space-y-6">
         <div className="rounded-3xl border border-border bg-card p-8 sm:p-14 shadow-lg space-y-6">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-foreground">
@@ -433,7 +448,7 @@ export default async function HomePage() {
             <span className="text-accent">Tell us what you're trying to build.</span>
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground max-w-xl mx-auto leading-relaxed">
-            You don't need a technical specification. Just tell Skyline Digital what you need, and we will review your goals and provide an itemized quote within 24 hours.
+            You don't need a technical specification. Just tell NorthStack Digitals what you need, and we will review your goals and provide an itemized quote within 24 hours.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
             <Link

@@ -30,9 +30,9 @@ describe('1. Currency & Paise Integer Arithmetic', () => {
     assert.equal(formatPaiseToINR(25000000), '₹2,50,000');
   });
 
-  test('generates tracking code in standard format SKY-YYYY-XXXX', () => {
+  test('generates tracking code in standard format NSTK-YYYY-XXXX', () => {
     const code = generateTrackingCode();
-    assert.match(code, /^SKY-\d{4}-\d{4}$/);
+    assert.match(code, /^NSTK-\d{4}-\d{4}$/);
   });
 });
 
