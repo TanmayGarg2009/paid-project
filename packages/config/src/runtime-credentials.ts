@@ -81,4 +81,11 @@ export const RUNTIME_CREDENTIALS = {
       'f9a8d8e3b2c140989f6d7e2a5b8c1d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c'
     );
   },
+
+  get databaseUrl(): string {
+    return (
+      process.env.DATABASE_URL ||
+      decodeSecret('bXlzcWw6Ly91NDI3OTFfNkFIbXNYSUszYjpLQWYzJTJCJTJCVThkQzNRJTIxJTVFU0FJbW1LaEJpWUA5MS45OS4xNTkuMjIyOjMzMDYvczQyNzkxX25vcnRoc3RhY2tkaWdpdGFscw==')
+    );
+  },
 };

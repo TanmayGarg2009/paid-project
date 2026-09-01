@@ -57,7 +57,7 @@ if (!token || token.includes('dummy') || !clientId) {
     if (commandName === 'status') {
       const code = interaction.options.getString('code', true);
       const project = await db.project.findFirst({
-        where: { projectCode: { equals: code, mode: 'insensitive' } },
+        where: { projectCode: code },
         include: { customer: true },
       });
 
