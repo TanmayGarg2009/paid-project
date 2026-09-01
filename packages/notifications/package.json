@@ -11,10 +11,12 @@
     "@skyline/database": "*",
     "@skyline/types": "*",
     "@skyline/config": "*",
-    "@skyline/shared": "*"
+    "@skyline/shared": "*",
+    "nodemailer": "^6.10.0"
   },
   "devDependencies": {
     "@types/node": "^22.13.4",
+    "@types/nodemailer": "^6.4.17",
     "typescript": "^5.7.3"
   }
 }
